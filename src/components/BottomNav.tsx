@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Compass, PlaySquare, Clock, History, ThumbsUp, Flame, Gamepad2, Music, Smartphone, User } from 'lucide-react';
+import { Home, PlaySquare, Smartphone, User } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 interface BottomNavProps {

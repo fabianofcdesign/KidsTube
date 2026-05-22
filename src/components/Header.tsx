@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { Menu, Search, Mic, Video, Bell, Lock, Unlock } from 'lucide-react';
+import { Search, Mic, Video, Bell, Lock, Unlock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 
 interface HeaderProps {
-  toggleSidebar: () => void;
   isUnlocked: boolean;
   onLockClick: () => void;
 }
@@ -15,7 +14,7 @@ interface UserProfile {
   picture: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ toggleSidebar, isUnlocked, onLockClick }) => {
+const Header: React.FC<HeaderProps> = ({ isUnlocked, onLockClick }) => {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
 
   const handleLoginSuccess = (credentialResponse: any) => {
@@ -31,9 +30,6 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar, isUnlocked, onLockClick 
   return (
     <header style={styles.header}>
       <div style={styles.left}>
-        <button style={styles.iconButton} onClick={toggleSidebar}>
-          <Menu color="var(--text-primary)" />
-        </button>
         <Link to="/" style={styles.logoContainer}>
           <div style={styles.logoIcon}>
             <div style={styles.playTriangle}></div>
