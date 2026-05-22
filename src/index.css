@@ -1,0 +1,70 @@
+:root {
+  --bg-color: #0f0f0f;
+  --text-primary: #f1f1f1;
+  --text-secondary: #aaaaaa;
+  --accent-color: #cc0000;
+  --hover-bg: #272727;
+  --border-color: #3f3f3f;
+  --search-bg: #121212;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", "Arial", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #717171;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Video card hover effects */
+.video-card:hover .thumbnail {
+  transform: scale(1.03);
+}
+.video-card:hover .hover-overlay {
+  opacity: 1 !important;
+}
+
+/* TV Navigation Focus States */
+*:focus-visible {
+  outline: 4px solid var(--text-primary);
+  outline-offset: 2px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  transform: scale(1.02);
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+button:focus-visible, a:focus-visible, div[tabindex]:focus-visible {
+  outline: 4px solid var(--accent-color);
+  background-color: var(--hover-bg);
+}
