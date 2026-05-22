@@ -17,9 +17,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ video, userData, onClose, tog
   const isWatchLater = userData.watchLater.some(v => v.id === video.id);
 
   return (
-    <div style={styles.overlay} onClick={onClose}>
-      <div style={styles.container} onClick={(e) => e.stopPropagation()}>
-        <button style={styles.closeBtn} onClick={onClose}>
+    <div className="video-overlay" style={styles.overlay} onClick={onClose}>
+      <div className="video-container" style={styles.container} onClick={(e) => e.stopPropagation()}>
+        <button className="video-close-btn" style={styles.closeBtn} onClick={onClose}>
           <X size={24} color="white" />
         </button>
         <div style={styles.playerWrapper}>
@@ -31,7 +31,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ video, userData, onClose, tog
             allowFullScreen
           />
         </div>
-        <div style={styles.controls}>
+        <div className="video-controls" style={styles.controls}>
           <div style={styles.controlGroup}>
             <button 
               style={{...styles.controlBtn, backgroundColor: isLiked ? 'var(--text-primary)' : 'rgba(255,255,255,0.1)'}} 

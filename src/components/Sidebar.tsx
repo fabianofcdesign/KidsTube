@@ -10,7 +10,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, isUnlocked }) => {
   if (!isOpen) {
     return (
-      <aside style={styles.sidebarCollapsed}>
+      <aside className="sidebar-collapsed" style={styles.sidebarCollapsed}>
         <Link to="/" style={styles.collapsedItem}>
           <Home size={24} color="var(--text-primary)" />
           <span style={styles.collapsedText}>Início</span>
@@ -34,7 +34,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, isUnlocked }) => {
   }
 
   return (
-    <aside style={styles.sidebar}>
+    <aside className="sidebar-expanded" style={styles.sidebar}>
       <div style={styles.section}>
         <Link to="/" style={{...styles.item, backgroundColor: 'var(--hover-bg)'}}>
           <Home size={24} color="var(--text-primary)" />
