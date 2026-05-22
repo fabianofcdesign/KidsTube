@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Search, Mic, Video, Bell, Lock, Unlock } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 
@@ -16,6 +16,8 @@ interface UserProfile {
 
 const Header: React.FC<HeaderProps> = ({ isUnlocked, onLockClick }) => {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
 
   const handleLoginSuccess = (credentialResponse: any) => {
     if (credentialResponse.credential) {
@@ -24,6 +26,13 @@ const Header: React.FC<HeaderProps> = ({ isUnlocked, onLockClick }) => {
         name: decoded.name,
         picture: decoded.picture
       });
+    }
+  };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
     }
   };
 
@@ -39,16 +48,18 @@ const Header: React.FC<HeaderProps> = ({ isUnlocked, onLockClick }) => {
       </div>
 
       <div style={styles.center}>
-        <div style={styles.searchContainer}>
+        <form onSubmit={handleSearch} style={styles.searchContainer}>
           <input 
             type="text" 
             placeholder="Pesquisar..." 
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             style={styles.searchInput} 
           />
-          <button style={styles.searchButton}>
+          <button type="submit" style={styles.searchButton}>
             <Search size={20} color="var(--text-primary)" />
           </button>
-        </div>
+        </form>
         <button style={styles.micButton}>
           <Mic size={20} color="var(--text-primary)" />
         </button>

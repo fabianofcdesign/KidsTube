@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import FeedPage from './pages/FeedPage';
 import UserLibraryPage from './pages/UserLibraryPage';
 import ShortsPage from './pages/ShortsPage';
+import SearchResults from './pages/SearchResults';
 import PinModal from './components/PinModal';
 import VideoPlayer from './components/VideoPlayer';
 import { useUserData } from './hooks/useUserData';
@@ -60,6 +61,14 @@ function App() {
         <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
           <main style={{ flex: 1, overflowY: 'auto', backgroundColor: 'var(--bg-color)' }}>
             <Routes>
+              <Route path="/search" element={
+                <SearchResults 
+                  isUnlocked={isUnlocked} 
+                  unlockedVideoIds={unlockedVideoIds}
+                  onUnlockRequest={handleVideoUnlockRequest}
+                  onPlayVideo={handlePlayVideo}
+                />
+              } />
               <Route path="/" element={
                 <Home 
                   isUnlocked={isUnlocked} 
