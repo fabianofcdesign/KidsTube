@@ -45,17 +45,4 @@ const BottomNav: React.FC<BottomNavProps> = ({ isUnlocked }) => {
   );
 };
 
-      <Link to="/subscriptions" className={`nav-item ${isActive('/subscriptions') ? 'active' : ''}`}>
-        <PlaySquare size={24} color={isActive('/subscriptions') ? 'var(--text-primary)' : 'var(--text-secondary)'} />
-        <span>Inscrições</span>
-      </Link>
-
-      <Link to="/history" className={`nav-item ${isActive('/history') ? 'active' : ''}`}>
-        <User size={24} color={isActive('/history') ? 'var(--text-primary)' : 'var(--text-secondary)'} />
-        <span>Você</span>
-      </Link>
-    </nav>
-  );
-};
-
 export default BottomNav;
