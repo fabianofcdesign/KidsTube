@@ -10,6 +10,7 @@ interface UserLibraryPageProps {
   unlockedVideoIds: string[];
   onUnlockRequest: (videoId: string) => void;
   onPlayVideo: (video: YouTubeVideo) => void;
+  headerAction?: React.ReactNode;
 }
 
 const UserLibraryPage: React.FC<UserLibraryPageProps> = ({
@@ -19,14 +20,18 @@ const UserLibraryPage: React.FC<UserLibraryPageProps> = ({
   isUnlocked,
   unlockedVideoIds,
   onUnlockRequest,
-  onPlayVideo
+  onPlayVideo,
+  headerAction
 }) => {
   return (
     <div style={styles.container}>
-      <h2 style={styles.headerTitle}>
-        <span style={styles.headerIcon}>{icon}</span>
-        {title}
-      </h2>
+      <div style={styles.headerRow}>
+        <h2 style={styles.headerTitle}>
+          <span style={styles.headerIcon}>{icon}</span>
+          {title}
+        </h2>
+        {headerAction}
+      </div>
 
       {videos.length > 0 ? (
         <div style={styles.grid}>
@@ -55,6 +60,14 @@ const styles: { [key: string]: React.CSSProperties } = {
   container: {
     padding: '24px',
   },
+  headerRow: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '24px',
+    borderBottom: '1px solid var(--border-color)',
+    paddingBottom: '16px',
+  },
   headerTitle: {
     display: 'flex',
     alignItems: 'center',
@@ -62,9 +75,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     fontSize: '24px',
     fontWeight: 'bold',
     color: 'var(--text-primary)',
-    marginBottom: '24px',
-    borderBottom: '1px solid var(--border-color)',
-    paddingBottom: '16px',
+    margin: 0,
   },
   headerIcon: {
     fontSize: '28px',

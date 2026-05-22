@@ -22,6 +22,16 @@ function App() {
   const [unlockTarget, setUnlockTarget] = useState<string | 'global' | null>(null);
   const [playingVideo, setPlayingVideo] = useState<any | null>(null);
 
+  const handleLockClick = () => {
+    if (isUnlocked) {
+      setIsUnlocked(false);
+      setUnlockedVideoIds([]);
+    } else {
+      setUnlockTarget('global');
+      setIsPinModalOpen(true);
+    }
+  };
+
   const handleVideoUnlockRequest = (videoId: string) => {
     setUnlockTarget(videoId);
     setIsPinModalOpen(true);
@@ -69,7 +79,7 @@ function App() {
                 <FeedPage 
                   title="Explorar" 
                   icon="🧭" 
-                  fetchFunction={() => fetchVideosByCategory('0', 20)} // Category 0 is general/popular
+                  fetchFunction={() => fetchVideosByCategory('0', 20)}
                   isUnlocked={isUnlocked}
                   unlockedVideoIds={unlockedVideoIds}
                   onUnlockRequest={handleVideoUnlockRequest}
@@ -80,7 +90,7 @@ function App() {
                 <FeedPage 
                   title="Inscrições" 
                   icon="▶️" 
-                  fetchFunction={() => fetchVideosByCategory('24', 15)} // Entertainment as mock
+                  fetchFunction={() => fetchVideosByCategory('24', 15)}
                   isUnlocked={isUnlocked}
                   unlockedVideoIds={unlockedVideoIds}
                   onUnlockRequest={handleVideoUnlockRequest}
@@ -89,13 +99,32 @@ function App() {
               } />
               <Route path="/history" element={
                 <UserLibraryPage 
-                  title="Histórico" 
-                  icon="🕒" 
+                  title="Você (Configurações)" 
+                  icon="⚙️" 
                   videos={userData.history}
                   isUnlocked={isUnlocked}
                   unlockedVideoIds={unlockedVideoIds}
                   onUnlockRequest={handleVideoUnlockRequest}
                   onPlayVideo={handlePlayVideo}
+                  headerAction={
+                    <button 
+                      onClick={handleLockClick} 
+                      style={{
+                        background: 'rgba(255,255,255,0.1)',
+                        border: 'none',
+                        padding: '8px 16px',
+                        borderRadius: '20px',
+                        color: 'white',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        fontWeight: 'bold'
+                      }}
+                    >
+                      {isUnlocked ? '🔒 Bloquear App' : '🔓 Desbloquear Tudo'}
+                    </button>
+                  }
                 />
               } />
               <Route path="/later" element={
