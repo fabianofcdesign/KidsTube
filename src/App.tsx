@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import Sidebar from './components/Sidebar';
+import BottomNav from './components/BottomNav';
 import Home from './pages/Home';
 import FeedPage from './pages/FeedPage';
 import UserLibraryPage from './pages/UserLibraryPage';
@@ -14,17 +14,12 @@ import './index.css';
 
 function App() {
   const { userData, addToHistory, toggleLike, toggleWatchLater } = useUserData();
-  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [isPinModalOpen, setIsPinModalOpen] = useState(false);
   
   const [unlockedVideoIds, setUnlockedVideoIds] = useState<string[]>([]);
   const [unlockTarget, setUnlockTarget] = useState<string | 'global' | null>(null);
   const [playingVideo, setPlayingVideo] = useState<any | null>(null);
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
 
   const handleLockClick = () => {
     if (isUnlocked) {
@@ -59,12 +54,10 @@ function App() {
     <Router>
       <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
         <Header 
-          toggleSidebar={toggleSidebar} 
           isUnlocked={isUnlocked} 
           onLockClick={handleLockClick} 
         />
         <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
-          <Sidebar isOpen={sidebarOpen} isUnlocked={isUnlocked} />
           <main style={{ flex: 1, overflowY: 'auto', backgroundColor: 'var(--bg-color)' }}>
             <Routes>
               <Route path="/" element={
@@ -167,6 +160,7 @@ function App() {
             </Routes>
           </main>
         </div>
+        <BottomNav isUnlocked={isUnlocked} />
       </div>
       <PinModal 
         isOpen={isPinModalOpen} 
