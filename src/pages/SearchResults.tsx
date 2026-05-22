@@ -42,13 +42,12 @@ const SearchResults: React.FC<SearchResultsProps> = ({
       ) : (
         <div style={styles.grid}>
           {videos.map(video => {
-            const canPlay = !video.isRestricted || isUnlocked || unlockedVideoIds.includes(video.id);
             return (
               <VideoCard 
                 key={video.id} 
                 video={video} 
-                canPlay={canPlay}
-                onPlay={() => onPlayVideo(video)}
+                isUnlocked={isUnlocked || !video.isRestricted || unlockedVideoIds.includes(video.id)}
+                onPlayVideo={() => onPlayVideo(video)}
                 onUnlockRequest={() => onUnlockRequest(video.id)}
               />
             );

@@ -47,55 +47,97 @@ const Header: React.FC<HeaderProps> = ({ isUnlocked, onLockClick }) => {
         </Link>
       </div>
 
-      <div style={styles.center}>
-        <form onSubmit={handleSearch} style={styles.searchContainer}>
-          <input 
-            type="text" 
-            placeholder="Pesquisar..." 
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            style={styles.searchInput} 
-          />
-          <button type="submit" style={styles.searchButton}>
-            <Search size={20} color="var(--text-primary)" />
-          </button>
-        </form>
-        <button style={styles.micButton}>
-          <Mic size={20} color="var(--text-primary)" />
-        </button>
-      </div>
-
       <div style={styles.right}>
-        <button style={styles.iconButton} onClick={onLockClick} title={isUnlocked ? "Bloquear acesso" : "Desbloquear acesso completo"}>
-          {isUnlocked ? <Unlock color="var(--accent-color)" /> : <Lock color="var(--text-secondary)" />}
-        </button>
         <button style={styles.iconButton}>
-          <Video color="var(--text-primary)" />
+          <div style={styles.bellContainer}>
+            <Bell size={24} color="var(--text-primary)" />
+            <span style={styles.badge}>1</span>
+          </div>
         </button>
-        <button style={styles.iconButton}>
-          <Bell color="var(--text-primary)" />
+        <button style={styles.iconButton} onClick={() => navigate('/search')}>
+          <Search size={24} color="var(--text-primary)" />
         </button>
-        {userProfile ? (
-          <img 
-            src={userProfile.picture} 
-            alt={userProfile.name} 
-            style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} 
-            title={userProfile.name}
-          />
-        ) : (
-          <GoogleLogin
-            onSuccess={handleLoginSuccess}
-            onError={() => {
-              console.log('Login Failed');
-            }}
-            useOneTap
-            type="icon"
-            shape="circle"
-          />
-        )}
       </div>
     </header>
   );
+};
+
+const styles: { [key: string]: React.CSSProperties } = {
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '0 12px',
+    height: '48px',
+    backgroundColor: 'var(--bg-color)',
+    position: 'sticky',
+    top: 0,
+    zIndex: 100,
+  },
+  left: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  logoContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '4px',
+    textDecoration: 'none',
+  },
+  logoIcon: {
+    width: '28px',
+    height: '20px',
+    backgroundColor: '#FF0000',
+    borderRadius: '4px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  playTriangle: {
+    width: 0,
+    height: 0,
+    borderTop: '4px solid transparent',
+    borderBottom: '4px solid transparent',
+    borderLeft: '8px solid white',
+    marginLeft: '2px',
+  },
+  logoText: {
+    color: 'var(--text-primary)',
+    fontSize: '20px',
+    fontWeight: 'bold',
+    letterSpacing: '-1px',
+    fontFamily: '"Oswald", sans-serif',
+  },
+  right: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+  },
+  iconButton: {
+    backgroundColor: 'transparent',
+    border: 'none',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '4px',
+  },
+  bellContainer: {
+    position: 'relative',
+    display: 'flex',
+  },
+  badge: {
+    position: 'absolute',
+    top: '-4px',
+    right: '-4px',
+    backgroundColor: '#FF0000',
+    color: 'white',
+    fontSize: '10px',
+    fontWeight: 'bold',
+    borderRadius: '10px',
+    padding: '1px 4px',
+    border: '2px solid var(--bg-color)',
+  }
 };
 
 const styles: { [key: string]: React.CSSProperties } = {
