@@ -22,16 +22,6 @@ function App() {
   const [unlockTarget, setUnlockTarget] = useState<string | 'global' | null>(null);
   const [playingVideo, setPlayingVideo] = useState<any | null>(null);
 
-  const handleLockClick = () => {
-    if (isUnlocked) {
-      setIsUnlocked(false);
-      setUnlockedVideoIds([]);
-    } else {
-      setUnlockTarget('global');
-      setIsPinModalOpen(true);
-    }
-  };
-
   const handleVideoUnlockRequest = (videoId: string) => {
     setUnlockTarget(videoId);
     setIsPinModalOpen(true);
@@ -54,10 +44,7 @@ function App() {
   return (
     <Router>
       <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-        <Header 
-          isUnlocked={isUnlocked} 
-          onLockClick={handleLockClick} 
-        />
+        <Header />
         <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
           <main style={{ flex: 1, overflowY: 'auto', backgroundColor: 'var(--bg-color)' }}>
             <Routes>

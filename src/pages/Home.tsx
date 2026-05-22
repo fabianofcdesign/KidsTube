@@ -60,6 +60,10 @@ const Home: React.FC<HomeProps> = ({ isUnlocked, unlockedVideoIds, onUnlockReque
     <div style={styles.container}>
       {/* Categories */}
       <div style={styles.categories}>
+        <button style={styles.compassBtn}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+        </button>
+        <div style={styles.chipDivider} />
         {categories.map(cat => (
           <button
             key={cat}
@@ -147,15 +151,41 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   categories: {
     display: 'flex',
-    gap: '10px',
-    marginBottom: '24px',
+    alignItems: 'center',
+    gap: '12px',
+    padding: '12px 16px',
     overflowX: 'auto',
-    paddingBottom: '12px',
+    whiteSpace: 'nowrap',
     scrollbarWidth: 'none',
+    msOverflowStyle: 'none',
+    position: 'sticky',
+    top: '48px', // just below header
+    zIndex: 90,
+    backgroundColor: 'var(--bg-color)',
+    margin: '-16px -24px 24px -24px', // Counteract container padding
+    borderBottom: '1px solid rgba(255,255,255,0.1)',
+  },
+  compassBtn: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    color: 'var(--text-primary)',
+    border: 'none',
+    borderRadius: '4px',
+    padding: '6px',
+    cursor: 'pointer',
+    flexShrink: 0,
+  },
+  chipDivider: {
+    width: '1px',
+    height: '24px',
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    flexShrink: 0,
   },
   categoryBtn: {
-    padding: '8px 16px',
-    backgroundColor: 'var(--hover-bg)',
+    padding: '6px 12px',
+    backgroundColor: 'rgba(255,255,255,0.1)',
     color: 'var(--text-primary)',
     border: 'none',
     borderRadius: '8px',
@@ -163,7 +193,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     fontWeight: '500',
     cursor: 'pointer',
     whiteSpace: 'nowrap',
-    transition: 'all 0.2s ease',
+    transition: 'background-color 0.2s ease',
+    flexShrink: 0,
   },
   activeBtn: {
     backgroundColor: 'var(--text-primary)',
